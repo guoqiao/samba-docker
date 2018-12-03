@@ -1,0 +1,61 @@
+#!/usr/bin/env ansible-playbook
+
+---
+- hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+
+    DOCKER_BUILD_DIR: "{{playbook_dir}}/.build"
+
+    SAMBA_REALM: "SAMDOM.EXAMPLE.COM"
+    SAMBA_DOMAIN: "SAMDOM"
+    SAMBA_USERNAME: "Administrator"
+    SAMBA_PASSWORD: "Password01@"
+    SAMBA_BACKEND_STORE: "tdb"
+    SAMBA_PDC_NAME: "dc0"
+
+    # these must match
+    SAMBA_BASE_IMAGE: "ubuntu:16.04"
+    SAMBA_PACKAGE_LIST: "ubuntu-1604.yml"
+
+  vars_files:
+    - "{{playbook_dir}}/{{SAMBA_PACKAGE_LIST}}"
+
+  tasks:
+
+    - name: create tmp dir
+      file:
+        path: "{{DOCKER_BUILD_DIR}}"
+        state: directory
+        mode: 0755
+      tags:
+        - render
+
+    - name: render templates
+      template:
+        src: "{{item}}"
+        dest: "{{DOCKER_BUILD_DIR}}/{{item|basename}}"
+        force: yes
+      with_fileglob:
+        - "templates/*.sh"
+        - "templates/Dockerfile-*"
+      tags:
+        - render
+
+    - name: build images
+      docker_image:
+        path: "{{DOCKER_BUILD_DIR}}"
+        dockerfile: "Dockerfile-{{item}}"
+        name:  "{{item}}"
+        tag: latest
+        state: build
+        nocache: yes
+        pull: no  # pull FROM image while build
+        push: no
+        force: "{{force|default('no')}}"
+        rm: yes  # rm intermediate containers after build
+      loop:
+        - samba-env
+        - samba-code
+        - samba-pdc

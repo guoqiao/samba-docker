@@ -1,0 +1,41 @@
+---
+version: "3"
+
+networks:
+  domain:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.10.10.10/24
+
+services:
+  pdc:
+    image: samba-pdc
+    container_name: dc0
+    hostname: dc0
+    privileged: true
+    networks:
+      domain:
+        ipv4_address: 10.10.10.10
+    dns:
+      - 10.10.10.10
+    dns_search:
+      - samdom.example.com
+    domainname: samdom.example.com
+  bdc:
+    image: samba-code
+    container_name: dc1
+    hostname: dc1
+    privileged: true
+    command: ./domain-join.sh DC
+    depends_on:
+      - pdc
+    networks:
+      domain:
+        ipv4_address: 10.10.10.11
+    dns:
+      - 10.10.10.10
+    dns_search:
+      - samdom.example.com
+    domainname: samdom.example.com

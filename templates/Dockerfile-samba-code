@@ -1,0 +1,20 @@
+FROM samba-env
+
+ARG SAMBA_REPO_URL=https://gitlab.com/catalyst-samba/samba.git
+ARG SAMBA_REPO_BRANCH=master
+ARG SAMBA_REPO_DIR=/opt/samba
+
+ENV PYTHONPATH="${SAMBA_REPO_DIR}/bin/python"
+
+# will create if not exist
+WORKDIR $SAMBA_REPO_DIR
+
+RUN git clone --depth 30 --branch $SAMBA_REPO_BRANCH $SAMBA_REPO_URL .
+
+# add scripts to image, must be after git clone
+ADD *.sh ./
+RUN chmod a+x *.sh
+
+RUN ./configure.developer && make -j && make install
+
+CMD /usr/local/samba/sbin/samba -F -i
