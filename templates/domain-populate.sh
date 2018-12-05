@@ -13,4 +13,5 @@
     --number-of-users=100 \
     --number-of-groups=10 \
     --average-groups-per-user=5 \
+    --max-members=100 \
     /usr/local/samba/private/sam.ldb
