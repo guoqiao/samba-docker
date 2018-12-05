@@ -12,7 +12,7 @@
     SAMBA_DOMAIN: "SAMDOM"
     SAMBA_USERNAME: "Administrator"
     SAMBA_PASSWORD: "Password01@"
-    SAMBA_BACKEND_STORE: "tdb"
+    SAMBA_BACKEND_STORE: "mdb"
     SAMBA_PDC_NAME: "dc0"
 
     # these must match
