@@ -4,7 +4,7 @@ FROM samba-code
 ADD *.sh ./
 RUN chmod a+x *.sh
 
-RUN ./domain-provision.sh && ./domain-populate.sh
+RUN ./domain-provision.sh
 
 # must be after above steps, otherwise files will lost
 VOLUME /usr/local/samba/private
