@@ -19,6 +19,12 @@
     SAMBA_BASE_IMAGE: "ubuntu:16.04"
     SAMBA_PACKAGE_LIST: "ubuntu-1604.yml"
 
+    # nums for domain populate
+    num_users: 5000
+    num_groups: "{{num_users|int * 0.1}}"
+    num_groups_per_user: 10
+    num_max_members: "{{num_users|int}}"  # max users to add to any group
+
   vars_files:
     - "{{playbook_dir}}/{{SAMBA_PACKAGE_LIST}}"
 
