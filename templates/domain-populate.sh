@@ -1,6 +1,12 @@
 #!/bin/bash -x
 
-./script/traffic_replay \
+PYTHONPATH="${SAMBA_REPO_DIR}/bin/python"
+
+# arg 1 with default
+NUM_USERS=${1-100000}
+NUM_MAX_MEMBERS=${2-100000}
+
+{{SAMBA_REPO_DIR}}/script/traffic_replay \
     --debuglevel 3 \
     --username {{SAMBA_USERNAME}} \
     --password {{SAMBA_PASSWORD}}  \
@@ -10,8 +16,13 @@
     --random-seed=1 \
     --option='ldb:nosync=true' \
     --generate-users-only \
-    --number-of-users={{num_users|int}} \
-    --number-of-groups={{num_groups|int}} \
-    --average-groups-per-user={{num_groups_per_user|int}} \
-    --max-members={{num_max_members|int}} \
+    --number-of-users=${NUM_USERS} \
+    --number-of-groups=$(expr $NUM_USERS / 10) \
+    --max-members=${NUM_MAX_MEMBERS} \
+    --average-groups-per-user=10 \
     /usr/local/samba/private/sam.ldb
+
+# backup, export and rename
+export TARGETDIR=/tmp/sambabackup
+/usr/local/samba/bin/samba-tool domain backup offline --targetdir=${TARGETDIR}
+mv ${TARGETDIR}/*.tar.bz2 /volume/samba-backup-docker-{{SAMBA_BACKEND_STORE}}-${NUM_USERS}-max-${NUM_MAX_MEMBERS}.tar.bz2

@@ -1,7 +1,6 @@
 #!/bin/bash -x
 
-/usr/local/samba/bin/samba-tool \
-    domain provision \
+/usr/local/samba/bin/samba-tool domain provision \
     --use-rfc2307 \
     --server-role=dc \
     --realm="{{SAMBA_REALM}}" \

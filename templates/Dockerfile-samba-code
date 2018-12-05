@@ -1,15 +1,11 @@
 FROM samba-env
 
-ARG SAMBA_REPO_URL=https://gitlab.com/catalyst-samba/samba.git
-ARG SAMBA_REPO_BRANCH=master
-ARG SAMBA_REPO_DIR=/opt/samba
-
-ENV PYTHONPATH="${SAMBA_REPO_DIR}/bin/python"
+ENV PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
 
 # will create if not exist
-WORKDIR $SAMBA_REPO_DIR
+WORKDIR {{SAMBA_REPO_DIR}}
 
-RUN git clone --depth 30 --branch $SAMBA_REPO_BRANCH $SAMBA_REPO_URL . && \
+RUN git clone --depth 30 --branch {{SAMBA_REPO_BRANCH}} {{SAMBA_REPO_URL}} . && \
     ./configure.developer && make -j && make install
 
 # add util scripts

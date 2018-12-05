@@ -1,10 +1,11 @@
 #!/bin/bash -x
 
-ROLE=${1-DC}
+SERVER=${1-dc0}  # join to this server
+ROLE=${2-DC}  # join as this role
 
 /usr/local/samba/bin/samba-tool \
     domain join {{SAMBA_DOMAIN}} $ROLE \
-    --server={{SAMBA_PDC_NAME}} \
+    --server=$SERVER \
     --backend-store={{SAMBA_BACKEND_STORE}} \
     --realm={{SAMBA_REALM}} \
     --adminpass={{SAMBA_PASSWORD}} \
