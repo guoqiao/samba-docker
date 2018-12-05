@@ -10,8 +10,8 @@
     --random-seed=1 \
     --option='ldb:nosync=true' \
     --generate-users-only \
-    --number-of-users=100 \
-    --number-of-groups=10 \
-    --average-groups-per-user=5 \
-    --max-members=100 \
+    --number-of-users={{num_users|int}} \
+    --number-of-groups={{num_groups|int}} \
+    --average-groups-per-user={{num_groups_per_user|int}} \
+    --max-members={{num_max_members|int}} \
     /usr/local/samba/private/sam.ldb
