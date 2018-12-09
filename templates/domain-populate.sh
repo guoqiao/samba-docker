@@ -3,8 +3,8 @@
 PYTHONPATH="${SAMBA_REPO_DIR}/bin/python"
 
 # arg 1 with default
-NUM_USERS=${1-100000}
-NUM_MAX_MEMBERS=${2-100000}
+NUM_USERS=${1-100}
+NUM_MAX_MEMBERS=${2-100}
 
 {{SAMBA_REPO_DIR}}/script/traffic_replay \
     --debuglevel 3 \
