@@ -1,11 +1,9 @@
 FROM {{SAMBA_BASE_IMAGE}}
 
-ENV CC="ccache gcc"
-ENV DEBIAN_FRONTEND=noninteractive
-ENV PATH="/usr/local/samba/sbin:/usr/local/samba/bin:${PATH}"
+ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 CC="ccache gcc" DEBIAN_FRONTEND=noninteractive PATH="/usr/local/samba/sbin:/usr/local/samba/bin:${PATH}"
 
 RUN apt-get update -y && \
-    apt-get -yq install apt-utils inetutils-ping ncdu vim language-pack-en && \
+    apt-get -yq install apt-utils sudo inetutils-ping ncdu vim language-pack-en && \
     update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 && \
     apt-get -yq install {% for item in packages %}{{item}} {% endfor %} && \
     apt-get -y clean && \
