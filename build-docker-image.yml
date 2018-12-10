@@ -22,6 +22,8 @@
     SAMBA_BASE_IMAGE: "ubuntu:16.04"
     SAMBA_PACKAGE_LIST: "ubuntu-1604.yml"
 
+    image: all
+
   vars_files:
     - "{{playbook_dir}}/{{SAMBA_PACKAGE_LIST}}"
 
@@ -58,6 +60,7 @@
         push: no
         force: "{{force|default('no')}}"
         rm: yes  # rm intermediate containers after build
+      when: image == 'all' or image == item
       loop:
         - samba-env
         - samba-code
