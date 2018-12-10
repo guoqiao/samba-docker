@@ -16,7 +16,7 @@
 
     SAMBA_REPO_URL: https://gitlab.com/catalyst-samba/samba.git
     SAMBA_REPO_BRANCH: master
-    SAMBA_REPO_DIR: /opt/samba
+    SAMBA_REPO_DIR: /home/samba/samba
 
     # these must match
     SAMBA_BASE_IMAGE: "ubuntu:16.04"

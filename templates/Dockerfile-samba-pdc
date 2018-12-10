@@ -1,7 +1,7 @@
 FROM samba-code
 
 # add scripts again, make it easy to update them
-ADD *.sh ./
+ADD --chown=samba *.sh ./
 RUN chmod a+x *.sh
 
 RUN ./domain-provision.sh
