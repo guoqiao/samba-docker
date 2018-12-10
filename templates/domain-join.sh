@@ -3,7 +3,7 @@
 SERVER=${1-dc0}  # join to this server
 ROLE=${2-DC}  # join as this role
 
-/usr/local/samba/bin/samba-tool \
+sudo python3 /usr/local/samba/bin/samba-tool \
     domain join {{SAMBA_DOMAIN}} $ROLE \
     --server=$SERVER \
     --backend-store={{SAMBA_BACKEND_STORE}} \

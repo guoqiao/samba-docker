@@ -7,7 +7,7 @@ export PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
 NUM_USERS=${1-100}
 NUM_MAX_MEMBERS=${2-100}
 
-sudo {{SAMBA_REPO_DIR}}/script/traffic_replay \
+sudo python3 {{SAMBA_REPO_DIR}}/script/traffic_replay \
     --debuglevel 3 \
     --username {{SAMBA_USERNAME}} \
     --password {{SAMBA_PASSWORD}}  \
@@ -25,5 +25,5 @@ sudo {{SAMBA_REPO_DIR}}/script/traffic_replay \
 
 # backup, export and rename
 export TARGETDIR=/tmp/sambabackup
-sudo /usr/local/samba/bin/samba-tool domain backup offline --targetdir=${TARGETDIR}
+sudo python3 /usr/local/samba/bin/samba-tool domain backup offline --targetdir=${TARGETDIR}
 sudo mv ${TARGETDIR}/*.tar.bz2 /volume/samba-backup-docker-{{SAMBA_BACKEND_STORE}}-${NUM_USERS}-max-${NUM_MAX_MEMBERS}.tar.bz2
