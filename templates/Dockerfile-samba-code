@@ -2,8 +2,10 @@ FROM samba-env
 
 ENV PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
 
-RUN git clone --depth 30 --branch {{SAMBA_REPO_BRANCH}} {{SAMBA_REPO_URL}} && cd samba && ./configure.developer && make -j && sudo make install
+RUN mkdir -p {{SAMBA_REPO_DIR}}
+WORKDIR {{SAMBA_REPO_DIR}}
 
-# add util scripts
+RUN git clone --depth 30 --branch {{SAMBA_REPO_BRANCH}} {{SAMBA_REPO_URL}} . && ./configure.developer && make -j && sudo make install
+
 ADD --chown=samba *.sh ./
 RUN chmod a+x *.sh
