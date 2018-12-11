@@ -41,6 +41,7 @@
       template:
         src: "{{item}}"
         dest: "{{DOCKER_BUILD_DIR}}/{{item|basename}}"
+        mode: 0755
         force: yes
       with_fileglob:
         - "templates/*.sh"

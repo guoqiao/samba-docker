@@ -1,6 +1,8 @@
 FROM samba-env
 
 ENV PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
+# these locale env vars are required for make
+ENV LANGUAGE=en_US:en LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 RUN mkdir -p {{SAMBA_REPO_DIR}}
 WORKDIR {{SAMBA_REPO_DIR}}
