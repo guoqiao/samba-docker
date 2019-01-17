@@ -1,39 +1,15 @@
 ---
 version: "3"
 
-# networks:
-  # samnet:
-    # driver: bridge
-    # ipam:
-      # driver: default
-      # config:
-        # - subnet: 10.1.1.0/24
-
-volumes:
-  samba-bin:
-
 services:
   pdc:
     image: samba-env:ubuntu1604
-    volumes:
-      - ./entrypoint.sh:/entrypoint.sh
-      - ~/samba:/home/samba/samba
-      - samba-bin:/home/samba/samba/bin
-    entrypoint: /entrypoint.sh
-    working_dir: /home/samba/samba
-    command: "/bin/bash"
     container_name: dc0
     hostname: dc0
-    user: samba
-    environment:
-      - CC=ccache gcc
-      - CCACHE_DIR=/home/samba/samba/bin/.ccache
-      - SAMBA=/home/samba/samba
-    # networks:
-      # samnet:
-        # ipv4_address: 10.1.1.0
-    # dns:
-      # - 10.1.1.0
+    user: root
+    volumes:
+      - ~/samba:/home/samba/samba
+    working_dir: /home/samba/samba
     dns_search:
       - samdom.example.com
     domainname: samdom.example.com
