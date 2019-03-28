@@ -1,4 +1,4 @@
-FROM samba-code
+FROM samba-common
 
 ADD --chown=samba *.sh ./
 RUN chmod a+x *.sh && ./domain-provision.sh
