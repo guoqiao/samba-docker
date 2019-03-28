@@ -12,7 +12,7 @@ services:
       - .:/home/samba/volume
     working_dir: /home/samba/samba
     dns_search:
-      - samdom.example.com
-    domainname: samdom.example.com
+      - "{{ SAMBA_REALM|lower }}"
+    domainname: "{{ SAMBA_REALM|lower }}"
     stdin_open: true
     tty: true
