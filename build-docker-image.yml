@@ -40,8 +40,7 @@
         mode: 0755
         force: yes
       with_fileglob:
-        - "templates/*.sh"
-        - "templates/Dockerfile-*"
+        - "templates/*"
       tags:
         - render
 
