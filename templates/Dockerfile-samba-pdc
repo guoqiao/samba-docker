@@ -1,12 +1,4 @@
 FROM samba-code
 
-# add scripts again, make it easy to update them
 ADD --chown=samba *.sh ./
-RUN chmod a+x *.sh
-
-RUN ./domain-provision.sh
-
-# must be after above steps, otherwise files will lost
-VOLUME /usr/local/samba/private
-# predefine a volume to exchange data
-VOLUME /volume
+RUN chmod a+x *.sh && ./domain-provision.sh
