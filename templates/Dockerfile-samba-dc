@@ -1,4 +1,4 @@
 FROM samba-common
 
-ADD --chown=samba *.sh ./
-RUN chmod a+x *.sh && ./domain-provision.sh
+ADD --chown=samba *.sh {{ SAMBA_VOLUME }}/
+RUN cd {{ SAMBA_VOLUME }} && sudo chmod a+x *.sh && sudo bash domain-provision.sh
