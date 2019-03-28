@@ -6,10 +6,12 @@ set -xue
 export PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
 
 # arg 1 with default
-NUM_USERS=${1-100}
-NUM_MAX_MEMBERS=${2-100}
+NUM_USERS=${1-1000}
+NUM_MAX_MEMBERS=${2-1000}
 
-sudo python3 {{SAMBA_REPO_DIR}}/script/traffic_replay \
+cd {{ SAMBA_REPO_DIR }}
+
+sudo python3 script/traffic_replay \
     --debuglevel 3 \
     --username {{SAMBA_USERNAME}} \
     --password {{SAMBA_PASSWORD}}  \
