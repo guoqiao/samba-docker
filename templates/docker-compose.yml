@@ -9,7 +9,7 @@ services:
     user: samba
     command: sudo /usr/local/samba/sbin/samba --interactive --debuglevel=3
     volumes:
-      - .:/home/samba/volume
+      - .:{{ SAMBA_VOLUME }}
     working_dir: /home/samba/samba
     dns_search:
       - "{{ SAMBA_REALM|lower }}"
