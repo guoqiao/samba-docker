@@ -1,13 +1,9 @@
-FROM samba-env
+FROM {{ SAMBA_BASE_IMAGE }}
 
 ENV PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
-# these locale env vars are required for make
-ENV LANGUAGE=en_US:en LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+ENV PATH=/usr/local/samba/bin:/usr/local/samba/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 
 RUN mkdir -p {{SAMBA_REPO_DIR}}
 WORKDIR {{SAMBA_REPO_DIR}}
 
 RUN git clone --depth 30 --branch {{SAMBA_REPO_BRANCH}} {{SAMBA_REPO_URL}} . && ./configure.developer && make -j && sudo make install
-
-ADD --chown=samba *.sh ./
-RUN chmod a+x *.sh
