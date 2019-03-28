@@ -1,4 +1,6 @@
-#!/bin/bash -x
+#!/bin/bash
+
+set -xue
 
 # so we can run this script from any where
 export PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
@@ -22,8 +24,3 @@ sudo python3 {{SAMBA_REPO_DIR}}/script/traffic_replay \
     --max-members=${NUM_MAX_MEMBERS} \
     --average-groups-per-user=10 \
     /usr/local/samba/private/sam.ldb
-
-# backup, export and rename
-export TARGETDIR=/tmp/sambabackup
-sudo python3 /usr/local/samba/bin/samba-tool domain backup offline --targetdir=${TARGETDIR}
-sudo mv ${TARGETDIR}/*.tar.bz2 /volume/samba-backup-docker-{{SAMBA_BACKEND_STORE}}-${NUM_USERS}-max-${NUM_MAX_MEMBERS}.tar.bz2
