@@ -29,8 +29,8 @@ do
     $SAMBA_TOOL dns add localhost $SAMBA_ZONE_MSDCS   dc$i.$SAMBA_REALM  AAAA $IPV6_ADDR $SAMBA_CRED
 
     # set each DC as nameserver for both zones
-    $SAMBA_TOOL dns add localhost $SAMBA_ZONE_DEFAULT dc$i NS dc$i.$SAMBA_REALM $SAMBA_CRED
-    $SAMBA_TOOL dns add localhost $SAMBA_ZONE_MSDCS   dc$i NS dc$i.$SAMBA_REALM $SAMBA_CRED
+    $SAMBA_TOOL dns add localhost $SAMBA_ZONE_DEFAULT $SAMBA_REALM NS dc$i.$SAMBA_REALM $SAMBA_CRED
+    $SAMBA_TOOL dns add localhost $SAMBA_ZONE_MSDCS   $SAMBA_REALM NS dc$i.$SAMBA_REALM $SAMBA_CRED
 
 done
 
