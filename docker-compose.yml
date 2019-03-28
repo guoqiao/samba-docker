@@ -2,13 +2,14 @@
 version: "3"
 
 services:
-  pdc:
-    image: samba-env:ubuntu1604
+  dc0:
+    image: samba-dc
     container_name: dc0
     hostname: dc0
-    user: root
+    user: samba
+    command: sudo /usr/local/samba/sbin/samba --interactive --debuglevel=3
     volumes:
-      - ~/samba:/home/samba/samba
+      - .:/home/samba/volume
     working_dir: /home/samba/samba
     dns_search:
       - samdom.example.com
