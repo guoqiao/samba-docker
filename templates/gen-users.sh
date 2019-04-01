@@ -24,5 +24,5 @@ sudo python3 script/traffic_replay \
     --number-of-users=${NUM_USERS} \
     --number-of-groups=$(expr $NUM_USERS / 10) \
     --max-members=${NUM_MAX_MEMBERS} \
-    --average-groups-per-user=10 \
+    --average-groups-per-user=6 \
     /usr/local/samba/private/sam.ldb
