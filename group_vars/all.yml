@@ -12,7 +12,7 @@ SAMBA_DNS_FORWARDER: 8.8.8.8
 SAMBA_BACKEND_STORE: "mdb"
 
 SAMBA_REPO_URL: https://gitlab.com/catalyst-samba/samba.git
-SAMBA_REPO_BRANCH: master
+SAMBA_REPO_VERSION: master
 SAMBA_REPO_DIR: /home/samba/samba
 
 SAMBA_VOLUME: "/home/samba/volume"

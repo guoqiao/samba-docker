@@ -6,4 +6,4 @@ ENV PATH=/usr/local/samba/bin:/usr/local/samba/sbin:/usr/local/bin:/usr/local/sb
 RUN mkdir -p {{SAMBA_REPO_DIR}}
 WORKDIR {{SAMBA_REPO_DIR}}
 
-RUN git clone --depth 30 --branch {{SAMBA_REPO_BRANCH}} {{SAMBA_REPO_URL}} . && ./configure.developer && make -j && sudo make install
+RUN git clone --depth 30 --branch {{SAMBA_REPO_VERSION}} {{SAMBA_REPO_URL}} . && ./configure.developer && make -j && sudo make install
