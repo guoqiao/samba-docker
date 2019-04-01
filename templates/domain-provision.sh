@@ -10,6 +10,6 @@ sudo python3 /usr/local/samba/bin/samba-tool domain provision \
     --krbtgtpass='{{SAMBA_PASSWORD}}' \
     --machinepass='{{SAMBA_PASSWORD}}' \
     --dnspass='{{SAMBA_PASSWORD}}' \
-    --option='dns forwarder=8.8.8.8' \
+    --option='dns forwarder={{SAMBA_DNS_FORWARDER}}' \
     --option='kccsrv:samba_kcc=true' \
     --option='ldapserverrequirestrongauth=no'
