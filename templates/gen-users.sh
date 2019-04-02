@@ -6,8 +6,8 @@ set -xue
 export PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
 
 # arg 1 with default
-NUM_USERS=${1-1000}
-NUM_MAX_MEMBERS=${2-1000}
+NUM_USERS=${1-5000}
+NUM_MAX_MEMBERS=${2-5000}
 
 cd {{ SAMBA_REPO_DIR }}
 
