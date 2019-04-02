@@ -9,7 +9,7 @@ SAMBA_USERNAME: "Administrator"
 SAMBA_PASSWORD: "Password01@"
 
 SAMBA_DNS_FORWARDER: 8.8.8.8
-samba_dns_backend: 'SAMBA_INTERNAL'  # SAMBA_INTERNAL|BIND9_FLATFILE|BIND9_DLZ|NONE
+samba_dns_backend: 'BIND9_DLZ'  # SAMBA_INTERNAL|BIND9_FLATFILE|BIND9_DLZ|NONE
 SAMBA_BACKEND_STORE: "mdb"
 
 SAMBA_REPO_URL: https://gitlab.com/catalyst-samba/samba.git
