@@ -5,10 +5,6 @@ set -xue
 # so we can run this script from any where
 export PYTHONPATH="{{SAMBA_REPO_DIR}}/bin/python"
 
-# arg 1 with default
-NUM_USERS=${1-5000}
-NUM_MAX_MEMBERS=${2-5000}
-
 cd {{ SAMBA_REPO_DIR }}
 
 sudo python3 script/traffic_replay \
@@ -21,8 +17,8 @@ sudo python3 script/traffic_replay \
     --random-seed=1 \
     --option='ldb:nosync=true' \
     --generate-users-only \
-    --number-of-users=${NUM_USERS} \
-    --number-of-groups=$(expr $NUM_USERS / 10) \
-    --max-members=${NUM_MAX_MEMBERS} \
-    --average-groups-per-user=6 \
+    --number-of-users={{ NUM_USERS }} \
+    --number-of-groups={{ NUM_GROUPS }} \
+    --max-members={{ NUM_MAX_MEMBERS }} \
+    --average-groups-per-user={{ NUM_AVERAGE_GEOUPS_PER_USER }} \
     /usr/local/samba/private/sam.ldb
