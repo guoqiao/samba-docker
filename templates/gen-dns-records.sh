@@ -33,19 +33,19 @@ done
 echo add A/PTR record for each user into user zone
 for name in $($SAMBA_TOOL user list)
 do
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED user.$SAMBA_REALM   $name.$SAMBA_REALM A     $IPV4_ADDR
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED user.$SAMBA_REALM *.$name.$SAMBA_REALM A     $IPV4_ADDR
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR   $name.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR *.$name.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED user.$SAMBA_REALM   $name.user.$SAMBA_REALM A     $IPV4_ADDR
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED user.$SAMBA_REALM *.$name.user.$SAMBA_REALM A     $IPV4_ADDR
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR   $name.user.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR *.$name.user.$SAMBA_REALM
 done
 
 echo add A/PTR record for each computer into computer zone
 for name in $($SAMBA_TOOL computer list)
 do
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED computer.$SAMBA_REALM   $name.$SAMBA_REALM A     $IPV4_ADDR
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED computer.$SAMBA_REALM *.$name.$SAMBA_REALM A     $IPV4_ADDR
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR   $name.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR *.$name.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED computer.$SAMBA_REALM    $name.computer.$SAMBA_REALM A     $IPV4_ADDR
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED computer.$SAMBA_REALM  *.$name.computer.$SAMBA_REALM A     $IPV4_ADDR
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR   $name.computer.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED $SAMBA_ZONE_PTR 10 PTR *.$name.computer.$SAMBA_REALM
     # add SRV record for each computer to srv zone
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED srv.$SAMBA_REALM srv.$name SRV '$name.$SAMBA_REALM 8080 0 100'
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED srv.$SAMBA_REALM srv.$name SRV '$name.computer.$SAMBA_REALM 8080 0 100'
 done
