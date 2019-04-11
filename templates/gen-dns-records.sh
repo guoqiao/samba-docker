@@ -22,12 +22,12 @@ echo "add all DCs as NS record for all zones"
 echo "bind/bind9/named required all zones to have NS records"
 for i in {1..60}
 do
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED          $SAMBA_REALM $SAMBA_REALM NS dc$i.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED   _msdcs.$SAMBA_REALM $SAMBA_REALM NS dc$i.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED     user.$SAMBA_REALM $SAMBA_REALM NS dc$i.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED computer.$SAMBA_REALM $SAMBA_REALM NS dc$i.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED      srv.$SAMBA_REALM $SAMBA_REALM NS dc$i.$SAMBA_REALM
-    $SAMBA_TOOL dns add localhost $SAMBA_CRED       $SAMBA_ZONE_PTR $SAMBA_REALM NS dc$i.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED          $SAMBA_REALM          $SAMBA_REALM NS dc$i.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED   _msdcs.$SAMBA_REALM   _msdcs.$SAMBA_REALM NS dc$i.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED     user.$SAMBA_REALM     user.$SAMBA_REALM NS dc$i.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED computer.$SAMBA_REALM computer.$SAMBA_REALM NS dc$i.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED      srv.$SAMBA_REALM      srv.$SAMBA_REALM NS dc$i.$SAMBA_REALM
+    $SAMBA_TOOL dns add localhost $SAMBA_CRED       $SAMBA_ZONE_PTR       $SAMBA_ZONE_PTR NS dc$i.$SAMBA_REALM
 done
 
 echo add A/PTR record for each user into user zone
